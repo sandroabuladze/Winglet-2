@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    // 1. Check if token exists
+    const token = localStorage.getItem('authToken');
+    
+    // 2. If it's missing, send them to the login folder
+    if (!token || token === "undefined" || token === "null") {
+        console.warn("Access denied. Redirecting to login...");
+        window.location.href = "RegistrationAndLogin/index.html"; 
+    }
+</script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <title>Winglet</title>
+  <link rel="icon" type="image/png" href="Photos/winglet FB.jpg">
+</head>
+<body>
+  <div class="container">
+    <!-- LEFT: SIDEBAR -->
+    <aside>
+      <div class="toggle">
+        <div class="logo">
+          <img src="Photos/winglet FB.jpg" alt="">
+          <h2>Winglet<span class="danger">Travelling</span></h2>
+        </div>
+        <div class="close" id="close-btn">
+          <span class="material-symbols-outlined">close</span>
+        </div>
+      </div>
+
+<div class="sidebar">
+    <a href="main.html"><span class="material-symbols-outlined">dashboard</span><h3>Main</h3></a>
+    <a href="reports_page.html"><span class="material-symbols-outlined">report</span><h3>Reports</h3></a>
+    
+    <a href="#" id="logoutBtnLink">
+        <span class="material-symbols-outlined" id="logoutBtn">logout</span>
+        <h3>Log Out</h3>
+    </a>
+</div>
+    </aside>
+
+    <!-- MIDDLE: MAIN -->
+    <main>
+
+<div class="saved-customers">
+    <h2>Saved Customers</h2>
+    <div class="customer-list" id="saved-customers-list">
+        </div>
+</div>
+<!-- SEARCH + DATE FILTER + EXPORT -->
+      <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search reports...">
+
+    <label>From:</label>
+    <input type="date" id="startDate">
+
+    <label>To:</label>
+    <input type="date" id="endDate">
+    <button class="filter-btn" id="filterBtn">Filter</button>
+    <button class="excel-btn" id="excelBtn">Export Excel</button>
+</div>
+
+<!-- REPORTS TABLE -->
+<table id="orders-table">
+    <thead>
+        <tr>
+            <th onclick="sortTable('orderNo')">Order Number</th>
+            <th onclick="sortTable('customerName')">Customer Name</th>
+            <th onclick="sortTable('tourName')">Tour Name</th>
+            <th onclick="sortTable('grossPrice')">Gross Price</th>
+            <th onclick="sortTable('startDate')">Start Date</th>
+            <th onclick="sortTable('endDate')">End Date</th>
+            <th onclick="sortTable('passengerCount')">Passengers Count</th>
+            <!-- <button class="btn-delete" onclick="deleteTour('${o.id}')"> -->
+</button>
+        </tr>
+    </thead>
+    <tbody id="orders-body"></tbody>
+</table>
+
+    <!-- RIGHT: TOP-RIGHT NAV -->
+    <div class="right-section">
+      <div class="nav">
+        <div class="dark-mode">
+          <span class="material-symbols-outlined active">light_mode</span>
+          <span class="material-symbols-outlined">dark_mode</span>
+        </div>
+        <div class="profile">
+  <div class="info">
+    <p>Hey, <b id="user-name">Loading...</b></p>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+  <script src="orders.js"></script>
+  <!-- SheetJS for real Excel export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</body>
+</html>

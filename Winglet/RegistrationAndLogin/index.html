@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="registraion_login.css">
+    <title>Winglet</title>
+    <link rel="icon" type="image/png" href="Photos/winglet FB.jpg">
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form>
+                <h1>Create Account</h1>
+                <span>Enter User For Registration</span>
+                <select name="" id="Roles">
+                    <option value="#">Employee</option>
+                    <option value="#">Accountant</option>
+                    <option value="#">Supervisor</option>
+                </select>
+                <input type="text" placeholder="User">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+    <form id="loginForm"> <h1>Sign In</h1>
+        <span>Enter User For Login</span>
+        <input type="text" id="loginUser" placeholder="User" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button type="submit">Sign In</button>
+    </form>
+</div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Enter Your Personal Details To Use Program Futures</p>
+                    <button class="hidden" id="login" href="winglet/main.html">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, User!</h1>
+                    <p>Register With Your Personal Details To Use Program Futures</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

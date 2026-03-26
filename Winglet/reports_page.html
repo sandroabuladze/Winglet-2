@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    // 1. Check if token exists
+    const token = localStorage.getItem('authToken');
+    
+    // 2. If it's missing, send them to the login folder
+    if (!token || token === "undefined" || token === "null") {
+        console.warn("Access denied. Redirecting to login...");
+        window.location.href = "RegistrationAndLogin/index.html"; 
+    }
+</script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Winglet</title>
+    <link rel="icon" type="image/png" href="Photos/winglet FB.jpg">
+</head>
+  <body>
+    <div class="container">
+      <!-- LEFT: SIDEBAR -->
+      <aside>
+        <div class="toggle">
+          <div class="logo">
+            <img src="Photos/winglet FB.jpg" alt="" />
+            <h2>Winglet<span class="danger">Travelling</span></h2>
+          </div>
+          <div class="close" id="close-btn">
+            <span class="material-symbols-outlined">close</span>
+          </div>
+        </div>
+
+<div class="sidebar">
+    <a href="main.html"><span class="material-symbols-outlined">dashboard</span><h3>Main</h3></a>
+    <a href="reports_page.html"><span class="material-symbols-outlined">report</span><h3>Reports</h3></a>
+    
+    <a href="#" id="logoutBtnLink">
+        <span class="material-symbols-outlined" id="logoutBtn">logout</span>
+        <h3>Log Out</h3>
+    </a>
+</div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main>
+        <h1>Reports</h1>
+
+        <!-- Order Form -->
+        <form id="order-form" autocomplete="on">
+          <!-- Customer Info -->
+           <div class="field-group autocomplete">
+    <label for="full-name">Saved Customer Name</label>
+    <input
+      type="text"
+      id="full-name" 
+      name="customerName"
+      list="customers"
+      placeholder="First and Last Name"
+    />
+    <datalist id="customers"></datalist>
+</div>
+          <fieldset class="new-customer-fields">
+            <legend>New Customer Information</legend>
+            <div class="field-group">
+              <label for="ID-number">ID Number</label>
+              <input type="text" id="ID-number" name="IDnumber" />
+            </div>
+            <div class="field-group">
+  <label for="full-name">Full Name</label>
+  <input 
+    type="text" 
+    id="full-name" 
+    name="FullName" 
+    list="customers" 
+  />
+  <datalist id="customers"></datalist>
+</div>
+            <div class="field-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" />
+            </div>
+            <div class="field-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" />
+            </div>
+          </fieldset>
+          <fieldset class="participant-fields">
+            <legend>Participants</legend>
+            <div>
+              <input
+                type="text"
+                id="participant-input"
+                name="participantInput"
+                placeholder="Enter Full Name"
+              />
+              <button type="button" id="add-participant">
+                Add Participant
+              </button>
+            </div>
+            <div id="participant-list"></div>
+          </fieldset>
+          <!-- Destinations -->
+          <fieldset class="destination-fields" hidden>
+            <legend>Destination(s)</legend>
+            <div class="field-group destination-group">
+  <label>Country</label>
+  <input type="text" id="dest-country" placeholder="Enter Country">
+  <label>City</label>
+  <input type="text" id="dest-city" placeholder="Enter City">
+</div>
+            <button type="button" id="add-destination">
+              Add Another Destination
+            </button>
+          </fieldset>
+          <label for="tour-type"> Tour Type
+          <select name="tour-type" id="tour-type">
+            <option value="#">Full Package</option>
+            <option value="#">Only Ticket</option>
+            <option value="#">Cruise Package</option>
+          </select>
+          </label>
+          <!-- Travel Dates -->
+          <div class="field-group">
+            <label for="travel-start">Travel Start Date</label>
+            <input type="date" id="travel-start" name="travelStart" />
+          </div>
+          <div class="field-group">
+            <label for="travel-end">Travel End Date</label>
+            <input type="date" id="travel-end" name="travelEnd" />
+          </div>
+
+          <!-- Travelers -->
+          <div class="field-group">
+            <label for="num-travelers">Number of Travelers</label>
+            <input
+              type="number"
+              id="num-travelers"
+              name="numTravelers"
+              min="1"
+              value="1"
+            />
+          </div>
+          <label for="supplier">Supplier
+            <input type="text" placeholder="Enter Supplier Name" id="supplier-name">
+          </label>
+          <label for="ticket-net">Ticket NET
+            <input type="text" placeholder="Enter Ticket NET" id="ticket-net">
+          </label>
+
+          <label for="ticket-supplier">Ticket Supplier
+            <input type="text" placeholder="Enter Ticket Supplier" id="ticket-supplier">
+          </label>
+
+          <label for="hotel-net">Hotel NET
+            <input type="text" placeholder="Enter Hotel NET" id="hotel-net">
+          </label>
+
+          <label for="hotel-supplier">Hotel Supplier
+            <input type="text" placeholder="Enter Hotel Supplier" id="hotel-supplier">
+          </label>
+
+          <label for="transfer-net">Transfer NET
+            <input type="text" placeholder="Enter Transfer NET" id="transfer-net">
+          </label>
+
+          <label for="transfer-supplier">Transfer Supplier
+            <input type="text" placeholder="Enter Transfer Supplier" id="transfer-supplier">
+          </label>
+
+          <label for="insurance-net">Insurance NET
+            <input type="text" placeholder="Enter Insurance NET" id="insurance-net">
+          </label>
+
+          <label for="insurance-supplier">Insurance Supplier
+            <input type="text" placeholder="Enter Insurance Supplier" id="insurance-supplier">
+          </label>
+
+          <label for="other-service-net">Other Service NET
+            <input type="text" placeholder="Enter Other Service NET" id="other-service-net">
+          </label>
+
+          <label for="other-service-supplier">Other Service Supplier
+            <input type="text" placeholder="Enter Other Service Supplier" id="other-service-supplier">
+          </label>
+
+          <!-- Order Source -->
+          <div class="field-group">
+            <label for="order-source">Order Source</label>
+            <input
+              type="text"
+              id="order-source"
+              name="orderSource"
+              list="sources"
+              placeholder="Select or add source"
+            />
+            <datalist id="sources">
+            </datalist>
+          </div>
+
+                    <!-- Sale Price -->
+          <div class="field-group">
+            <label for="sale-price">Total Price (GEL)</label>
+            <input
+              type="number"
+              step="0.01"
+              id="sale-price"
+              name="salePrice"
+              placeholder="Enter Total Price In GEL"
+            />
+          </div>
+
+          <!-- Payments -->
+          <fieldset class="payments-fields">
+            <legend>Payments</legend>
+            <div
+              class="field-group"
+              style="display: flex; gap: 0.75rem; align-items: flex-end"
+            >
+              <div style="flex: 1">
+                <label for="payment-bank">Bank</label>
+                <select id="payment-bank">
+                  <option value="">-- Bank --</option>
+                  <option value="TBC">TBC</option>
+                  <option value="BOG">BOG</option>
+                  <option value="Credo">Credo</option>
+                  <option value="Liberty">Liberty</option>
+                </select>
+              </div>
+              <div style="flex: 1">
+                <label for="payment-amount">Amount (GEL)</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  id="payment-amount"
+                  placeholder="e.g. 1000"
+                />
+              </div>
+              <div style="width: 220px">
+                <button type="button" id="add-payment">Add Payment</button>
+              </div>
+            </div>
+
+            <div
+              id="payments-list"
+              class="tag-list"
+              style="margin-top: 0.5rem"
+            ></div>
+
+            <div
+              class="payments-summary"
+              style="display: flex; gap: 1.5rem; margin-top: 0.75rem"
+            >
+            </div>
+          </fieldset>
+          <!-- Company Expenses -->
+          <fieldset class="expenses-fields">
+            <legend>Company Expenses</legend>
+            <div
+              class="field-group"
+              style="display: flex; gap: 0.75rem; align-items: flex-end"
+            >
+              <div style="flex: 1">
+                <label for="expense-amount">Amount</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  id="expense-amount"
+                  placeholder="e.g. 500"
+                />
+              </div>
+              <div style="flex: 1">
+                <label for="expense-currency">Currency</label>
+                <select id="expense-currency">
+                  <option value="GEL">GEL</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                </select>
+              </div>
+              <div class="field-group">
+              <label for="supplier">Requisites</label>
+              <select name="requisites" id="requisites">
+                <option value="BOG">GE83BG0000000537769256</option>
+                <option value="TBC">GE94TB7846236020100004</option>
+              </select>
+            </div>
+              <div style="width: 220px">
+                <button type="button" id="add-expense">Add Expense</button>
+              </div>
+            </div>
+
+            <div
+              id="expenses-list"
+              class="tag-list"
+              style="margin-top: 0.5rem"
+            ></div>
+
+            <div
+              class="expenses-summary"
+              style="display: flex; gap: 1.5rem; margin-top: 0.75rem"
+            >
+            </div>
+          </fieldset>
+
+          <div class="field-group" style="margin-top: 0.75rem">
+              <label for="accounting-note">Accounting Comment</label>
+              <textarea
+                id="accounting-note"
+                rows="3"
+                placeholder="Note for this order"
+              ></textarea>
+            </div>
+          <button type="submit" class="btn-primary">Submit Report</button>
+        </form>
+        
+      <!-- RIGHT: TOP-RIGHT NAV -->
+      <div class="right-section">
+        <div class="nav">
+          <div class="dark-mode">
+            <span class="material-symbols-outlined active">light_mode</span>
+            <span class="material-symbols-outlined">dark_mode</span>
+          </div>
+          <div class="profile">
+  <div class="info">
+    <p>Hey, <b id="user-name">Loading...</b></p>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
